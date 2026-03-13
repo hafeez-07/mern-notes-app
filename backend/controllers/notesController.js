@@ -74,8 +74,23 @@ export const deleteNote = async (req, res) => {
         error: "No note found",
       });
     }
-    res.status(204).json({
+    res.status(200).json({
       message: "successfully deleted",
+    });
+  } catch (err) {
+    res.status(500).json({
+      error: err.message,
+    });
+  }
+};
+
+//clear all notes
+
+export const deleteAllNotes = async (req, res) => {
+  try {
+    await Note.deleteMany();
+    res.status(200).json({
+      msg: "deleted succesfully",
     });
   } catch (err) {
     res.status(500).json({
@@ -89,7 +104,7 @@ export const deleteNote = async (req, res) => {
 export const getAllNotes = async (req, res) => {
   try {
     const allNotes = await Note.find()
-      .select("title body")
+      .select("title body createdAt updatedAt ")
       .sort({ createdAt: -1 });
     if (allNotes.length === 0) {
       return res.status(404).json({

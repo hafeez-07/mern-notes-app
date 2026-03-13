@@ -6,7 +6,7 @@ const Navbar = () => {
         <div className="destructive-button">
           Logout
         </div>
-        
+       
       </div>
     </div>
   );

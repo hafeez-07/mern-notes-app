@@ -1,13 +1,39 @@
-import React from "react";
+import React, { useState } from "react";
+import type { Note } from "../types/note";
+import { createNote } from "../api/notesApi";
 
-const NoteForm = () => {
+type Props = {
+  setNotes: React.Dispatch<React.SetStateAction<Note[]>>;
+};
+
+const NoteForm = ({ setNotes }: Props) => {
+  const [title, setTitle] = useState("");
+  const [body, setBody] = useState("");
+
   const textAreaHandler = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const el = e.target;
-
     el.style.height = "auto";
-
     el.style.height = el.scrollHeight + 4 + "px";
-    console.log(el.scrollHeight);
+    setBody(el.value);
+  };
+
+  const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (title.trim() === "" || body.trim() === "") {
+      return;
+    }
+
+    const savedNote = await createNote({ title, body });
+
+    setNotes((prev) =>
+      [...prev, savedNote].sort(
+        (a, b) =>
+          new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime(),
+      ),
+    );
+
+    setTitle("");
+    setBody("");
   };
 
   return (
@@ -16,19 +42,22 @@ const NoteForm = () => {
         Create a Note
       </h2>
 
-      <form className="flex flex-col gap-2  p-4 ">
+      <form onSubmit={submitHandler} className="flex flex-col gap-2  p-4 ">
         <input
           type="text"
           name="title"
-          className="input-field"
+          value={title}
           placeholder="Title"
+          onChange={(e) => setTitle(e.target.value)}
+          className="input-field"
         />
         <textarea
-        
-          className="input-field resize-none max-h-60 "
+          rows={3}
+          name="body"
+          value={body}
           onChange={textAreaHandler}
           placeholder="write your note here.."
-          rows={3}
+          className="input-field resize-none max-h-60 "
         ></textarea>
         <input
           className="border border-orange-400 bg-orange-500 font-semibold text-white rounded py-1 cursor-pointer"
