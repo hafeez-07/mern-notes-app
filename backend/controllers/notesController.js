@@ -124,11 +124,7 @@ export const getNote = async (req, res) => {
   try {
     const { id } = req.params;
     const note = await Note.findById(id).select("title body");
-    if (!note) {
-      return res.status(404).json({
-        error: "Note not found",
-      });
-    }
+
     res.status(200).json(note);
   } catch (err) {
     res.status(500).json({
