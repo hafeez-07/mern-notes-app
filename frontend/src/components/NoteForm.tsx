@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import type { Note } from "../types/note";
 import { createNote } from "../api/notesApi";
+import { toast } from "sonner";
 
 type Props = {
   setNotes: React.Dispatch<React.SetStateAction<Note[]>>;
@@ -31,6 +32,9 @@ const NoteForm = ({ setNotes }: Props) => {
           new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime(),
       ),
     );
+    toast.success("Added succesfully", {
+      duration: 2000,
+    });
 
     setTitle("");
     setBody("");

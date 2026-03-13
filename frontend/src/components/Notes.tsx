@@ -1,6 +1,8 @@
 import { FaTrash, FaPen } from "react-icons/fa";
 import type { Note } from "../types/note";
 import { deleteNote, deleteAll } from "../api/notesApi";
+import { toast } from "sonner";
+import { useRef } from "react";
 
 type NoteProps = {
   notes: Note[];
@@ -8,31 +10,79 @@ type NoteProps = {
 };
 
 const Notes = ({ notes, setNotes }: NoteProps) => {
+  const deleteTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
   const deleteOneNote = async (id: string) => {
     //save notes , incase if the delete fails
-    const previousNotes = notes;
+    const previousNotes = [...notes];
 
-    setNotes((prev) => prev.filter((note) => note._id != id));
-
-    try {
-      await deleteNote(id);
-    } catch (err) {
-      setNotes(previousNotes);
-    }
+    toast("Confirm delete?", {
+      description: "This will permanently delete the note",
+      duration: 6000,
+      action: {
+        label: "delete",
+        onClick: async () => {
+          setNotes((prev) => prev.filter((note) => note._id != id));
+          try {
+            await deleteNote(id);
+          } catch (err) {
+            setNotes(previousNotes);
+          }
+        },
+      },
+      cancel: {
+        label: "cancel",
+        onClick: () => {},
+      },
+    });
   };
 
   const deleteAllNotes = async () => {
-    //save prev notes
-    const previousNotes = notes;
-    setNotes([]);
-
-    try {
-      await deleteAll();
-      console.log("deleted all");
-    } catch (err) {
-      console.log("error occured");
-      setNotes(previousNotes);
+    //when there is no notes
+    if (notes.length === 0) {
+      return toast.error("No notes found", {
+        duration: 2000,
+      });
     }
+
+    //save prev notes
+    const previousNotes = [...notes];
+
+    toast("Confirm delete?", {
+      duration: 6000,
+      description: "This will permanently delete all notes",
+      action: {
+        label: "clear all",
+        onClick: () => {
+          setNotes([]);
+          deleteTimeout.current = setTimeout(async () => {
+            try {
+              await deleteAll();
+              console.log("deleted all");
+            } catch (err) {
+              console.log("error occured");
+              setNotes(previousNotes);
+            }
+          }, 6000);
+
+          toast("All notes deleted successfully", {
+            duration: 3000,
+            action: {
+              label: "undo",
+              onClick: () => {
+                setNotes(previousNotes);
+                if (deleteTimeout.current) {
+                  clearTimeout(deleteTimeout.current);
+                }
+              },
+            },
+          });
+        },
+      },
+      cancel: {
+        label: "cancel",
+        onClick: () => {},
+      },
+    });
   };
 
   return (
