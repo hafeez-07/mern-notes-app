@@ -1,5 +1,6 @@
 const BASE_URL = 'http://localhost:3000';
-import type { CreateNote} from "../types/note";
+
+import type { CreateNote, UpdateNote} from "../types/note";
 
 
 
@@ -43,6 +44,31 @@ export const deleteAll = async ()=>{
     })
     if(!response.ok){
         throw new Error("Could not delete all notes");
+    }
+    return response.json();
+}
+
+export const updateNote=async (id:string ,note:UpdateNote)=>{
+
+    const response = await fetch(`${BASE_URL}/update/${id}`,{
+        method:"PUT",
+        headers:{
+            "Content-Type":"application/json"
+        },
+        body:JSON.stringify(note)
+    })
+
+    if(!response.ok){
+        throw new Error("Could not update note")
+    }
+
+    return response.json();
+}
+
+export const getNote = async (id:string)=>{
+    const response = await fetch(`${BASE_URL}/read/${id}`);
+    if(!response.ok){
+        throw new Error("Could not load note");
     }
     return response.json();
 }

@@ -1,11 +1,11 @@
-import Footer from "./components/Footer";
-import Navbar from "./components/Navbar";
-import NoteForm from "./components/NoteForm";
-import Notes from "./components/Notes";
 import { fetchNotes } from "./api/notesApi.ts";
 import { useEffect, useState } from "react";
 import type { Note } from "./types/note.ts";
-import { Toaster } from "sonner";
+
+import Home from "./pages/Home.tsx";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import RootLayout from "./layout/RootLayout.tsx";
+import EditNote from "./pages/EditNote.tsx";
 
 function App() {
   const [notes, setNotes] = useState<Note[]>([]);
@@ -18,18 +18,24 @@ function App() {
     loadNotes();
   }, []);
 
-  return (
-    <div className="flex flex-col gap-10 min-h-screen bg-linear-to-br from-zinc-300 to-zinc-200 ">
-      <Navbar />
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <RootLayout />,
+      children: [
+        {
+          index: true,
+          element: <Home notes={notes} setNotes={setNotes} />,
+        },
+        {
+          path: "edit/:id",
+          element: <EditNote setNotes={setNotes} notes={notes} />,
+        },
+      ],
+    },
+  ]);
 
-      <div className="px-4 ">
-        <Toaster position="top-center" />
-        <NoteForm setNotes={setNotes} />
-        <Notes notes={notes} setNotes={setNotes} />
-      </div>
-      <Footer />
-    </div>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;

@@ -105,7 +105,7 @@ export const getAllNotes = async (req, res) => {
   try {
     const allNotes = await Note.find()
       .select("title body createdAt updatedAt ")
-      .sort({ createdAt: -1 });
+      .sort({ updatedAt: -1 });
 
     res.status(200).json(allNotes);
   } catch (err) {

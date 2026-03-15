@@ -8,3 +8,5 @@ export type Note ={
 }
 
 export type CreateNote = Omit<Note,"_id" | "createdAt"| "updatedAt">;
+
+export type UpdateNote = CreateNote;

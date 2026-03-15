@@ -3,6 +3,7 @@ import type { Note } from "../types/note";
 import { deleteNote, deleteAll } from "../api/notesApi";
 import { toast } from "sonner";
 import { useRef } from "react";
+import { Link } from "react-router-dom";
 
 type NoteProps = {
   notes: Note[];
@@ -15,7 +16,7 @@ const Notes = ({ notes, setNotes }: NoteProps) => {
     //save notes , incase if the delete fails
     const previousNotes = [...notes];
 
-    toast("Confirm delete?", {
+    toast.warning("Confirm delete?", {
       description: "This will permanently delete the note",
       duration: 6000,
       action: {
@@ -27,6 +28,9 @@ const Notes = ({ notes, setNotes }: NoteProps) => {
           } catch (err) {
             setNotes(previousNotes);
           }
+          toast.success("Deleted succesfully", {
+            duration: 2000,
+          });
         },
       },
       cancel: {
@@ -47,7 +51,7 @@ const Notes = ({ notes, setNotes }: NoteProps) => {
     //save prev notes
     const previousNotes = [...notes];
 
-    toast("Confirm delete?", {
+    toast.warning("Confirm delete?", {
       duration: 6000,
       description: "This will permanently delete all notes",
       action: {
@@ -57,14 +61,12 @@ const Notes = ({ notes, setNotes }: NoteProps) => {
           deleteTimeout.current = setTimeout(async () => {
             try {
               await deleteAll();
-              console.log("deleted all");
             } catch (err) {
-              console.log("error occured");
               setNotes(previousNotes);
             }
           }, 6000);
 
-          toast("All notes deleted successfully", {
+          toast.info("All notes deleted successfully", {
             duration: 3000,
             action: {
               label: "undo",
@@ -73,6 +75,9 @@ const Notes = ({ notes, setNotes }: NoteProps) => {
                 if (deleteTimeout.current) {
                   clearTimeout(deleteTimeout.current);
                 }
+                toast.success("All notes restored", {
+                  duration: 2000,
+                });
               },
             },
           });
@@ -87,14 +92,15 @@ const Notes = ({ notes, setNotes }: NoteProps) => {
 
   return (
     <div className="max-w-5xl mx-auto mt-15 ">
-      <div className="flex justify-between">
+      <div className="flex justify-between mb-3">
         <h3 className="text-xl font-semibold">Your notes</h3>
         <button className="destructive-button" onClick={deleteAllNotes}>
           clear all
         </button>
       </div>
+
       {notes.length > 0 ? (
-        <div className=" grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
+        <div className=" grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
           {notes.map((note) => (
             <div
               key={note._id}
@@ -116,7 +122,9 @@ const Notes = ({ notes, setNotes }: NoteProps) => {
                 </div>
                 <div className="flex gap-1">
                   <button className=" px-1 rounded hover:cursor-pointer hover:text-blue-500 transition-all duration-300">
-                    <FaPen className="text-sm" />
+                    <Link to={`edit/${note._id}`}>
+                      <FaPen className="text-sm" />
+                    </Link>
                   </button>
                   <button className="  px-1 rounded hover:cursor-pointer  hover:text-red-500 transition-all duration-300">
                     <FaTrash
