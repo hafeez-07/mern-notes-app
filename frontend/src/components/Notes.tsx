@@ -104,12 +104,12 @@ const Notes = ({ notes, setNotes }: NoteProps) => {
           {notes.map((note) => (
             <div
               key={note._id}
-              className="mt-5 bg-white  rounded-xl hover:scale-[1.02] transition-all duration-300 hover:shadow-2xl  shadow-zinc-500 flex flex-col"
+              className="mt-5 bg-zinc-900 rounded-xl hover:scale-[1.02] transition-all duration-300 hover:shadow-lg  shadow-orange-500 flex flex-col"
             >
-              <h4 className=" border-b p-2 font-semibold text-lg border-zinc-300 pb-1">
+              <h4 className=" border-b p-2 font-semibold text-lg border-zinc-700 pb-1">
                 {note.title}
               </h4>
-              <div className="grow line-clamp-3 p-2 border-b border-zinc-300">
+              <div className="grow line-clamp-3 p-2 border-b border-zinc-700">
                 {note.body}
               </div>
               <div className="flex justify-between p-2 mt-auto">
@@ -123,7 +123,7 @@ const Notes = ({ notes, setNotes }: NoteProps) => {
                 <div className="flex gap-1">
                   <button className=" px-1 rounded hover:cursor-pointer hover:text-blue-500 transition-all duration-300">
                     <Link to={`edit/${note._id}`}>
-                      <FaPen className="text-sm" />
+                      <FaPen className="text-sm text-orange-400" />
                     </Link>
                   </button>
                   <button className="  px-1 rounded hover:cursor-pointer  hover:text-red-500 transition-all duration-300">

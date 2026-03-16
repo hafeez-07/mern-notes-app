@@ -2,6 +2,9 @@ import mongoose from "mongoose";
 
 const userSchema = mongoose.Schema(
   {
+    fullname: {
+      type: String,
+    },
     username: {
       type: String,
       required: true,
@@ -17,7 +20,7 @@ const userSchema = mongoose.Schema(
       required: true,
     },
   },
-  { timestamp: true },
+  { timestamps: true },
 );
 
 const User = mongoose.model("User", userSchema);

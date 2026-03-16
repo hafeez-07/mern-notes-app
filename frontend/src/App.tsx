@@ -6,6 +6,9 @@ import Home from "./pages/Home.tsx";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import RootLayout from "./layout/RootLayout.tsx";
 import EditNote from "./pages/EditNote.tsx";
+import Register from "./pages/Register.tsx";
+import AuthLayout from "./layout/AuthLayout.tsx";
+import Login from "./pages/Login.tsx";
 
 function App() {
   const [notes, setNotes] = useState<Note[]>([]);
@@ -21,7 +24,7 @@ function App() {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <RootLayout />,
+      element: <RootLayout setNotes={setNotes} />,
       children: [
         {
           index: true,
@@ -30,6 +33,20 @@ function App() {
         {
           path: "edit/:id",
           element: <EditNote setNotes={setNotes} notes={notes} />,
+        },
+      ],
+    },
+
+    {
+      element: <AuthLayout />,
+      children: [
+        {
+          path: "/register",
+          element: <Register />,
+        },
+        {
+          path: "/login",
+          element: <Login />,
         },
       ],
     },

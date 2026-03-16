@@ -3,9 +3,10 @@ const BASE_URL = 'http://localhost:3000';
 import type { CreateNote, UpdateNote} from "../types/note";
 
 
-
 export const fetchNotes=async()=>{
-    const response=await fetch(`${BASE_URL}/read`);
+    const response=await fetch(`${BASE_URL}/read`,{
+        credentials:"include"
+    });
     if(!response.ok){
         throw new Error("Could not fetch notes");
     }
@@ -18,6 +19,7 @@ export const createNote = async (note:CreateNote)=>{
         headers:{
             "Content-Type":"application/json"
         },
+        credentials:"include",
         body:JSON.stringify(note),
     });
     if(!response.ok){
@@ -29,6 +31,7 @@ export const createNote = async (note:CreateNote)=>{
 export const deleteNote = async (id:string)=>{
     const response=await fetch(`${BASE_URL}/delete/${id}`,{
         method:"DELETE",
+        credentials:"include"
     })
 
     if(!response.ok){
@@ -40,7 +43,8 @@ export const deleteNote = async (id:string)=>{
 
 export const deleteAll = async ()=>{
     const response=await fetch(`${BASE_URL}/deleteAll`,{
-        method:"DELETE"
+        method:"DELETE",
+        credentials:"include"
     })
     if(!response.ok){
         throw new Error("Could not delete all notes");
@@ -55,6 +59,7 @@ export const updateNote=async (id:string ,note:UpdateNote)=>{
         headers:{
             "Content-Type":"application/json"
         },
+        credentials:"include",
         body:JSON.stringify(note)
     })
 
@@ -66,7 +71,9 @@ export const updateNote=async (id:string ,note:UpdateNote)=>{
 }
 
 export const getNote = async (id:string)=>{
-    const response = await fetch(`${BASE_URL}/read/${id}`);
+    const response = await fetch(`${BASE_URL}/read/${id}`,{
+        credentials : "include"
+    });
     if(!response.ok){
         throw new Error("Could not load note");
     }

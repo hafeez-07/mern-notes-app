@@ -2,12 +2,17 @@ import { Outlet } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { Toaster } from "sonner";
+import type { Note } from "../types/note";
 
-const RootLayout = () => {
+type Props = {
+  setNotes: React.Dispatch<React.SetStateAction<Note[]>>;
+};
+
+const RootLayout = ({ setNotes }: Props) => {
   return (
     <div className="flex flex-col min-h-screen ">
-      <Navbar />
-      <main className=" grow bg-linear-to-bl from-zinc-300 to-zinc-200 py-8">
+      <Navbar setNotes={setNotes} />
+      <main className=" grow bg-linear-to-bl from-zinc-900 to-zinc-800 text-white  py-8">
         <Toaster position="top-center" richColors />
         <Outlet />
       </main>

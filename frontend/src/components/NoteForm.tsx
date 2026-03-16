@@ -44,8 +44,8 @@ const NoteForm = ({ setNotes }: Props) => {
   };
 
   return (
-    <div className="max-w-5xl border mx-auto bg-white border-white rounded-xl">
-      <h2 className="text-2xl font-semibold border-b py-2 px-4 border-zinc-200">
+    <div className="max-w-5xl border  border-zinc-900  mx-auto rounded-xl bg-zinc-900">
+      <h2 className="text-2xl font-semibold border-b border-zinc-700 py-2 px-4 ">
         Create a Note
       </h2>
 
@@ -66,11 +66,7 @@ const NoteForm = ({ setNotes }: Props) => {
           placeholder="write your note here.."
           className="input-field resize-none max-h-60 "
         ></textarea>
-        <input
-          className="border border-orange-400 bg-orange-500 font-semibold text-white rounded py-1 cursor-pointer"
-          type="submit"
-          value="Save Note"
-        />
+        <input className="submit-button" type="submit" value="Save Note" />
       </form>
     </div>
   );

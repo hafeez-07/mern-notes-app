@@ -10,6 +10,7 @@ export const getHome = (req, res) => {
 export const addNote = async (req, res) => {
   try {
     const { title, body } = req.body;
+
     if (!title || !body) {
       return res.status(400).json({
         error: "Both title and body is required",
@@ -18,6 +19,7 @@ export const addNote = async (req, res) => {
     const newNote = await Note.create({
       title,
       body,
+      userId: req.userId,
     });
     res.status(201).json(newNote);
   } catch (err) {
@@ -40,8 +42,8 @@ export const updateNote = async (req, res) => {
       });
     }
 
-    const updatedNote = await Note.findByIdAndUpdate(
-      id,
+    const updatedNote = await Note.findOneAndUpdate(
+      { _id: id, userId: req.userId },
       {
         title,
         body,
@@ -68,7 +70,10 @@ export const updateNote = async (req, res) => {
 export const deleteNote = async (req, res) => {
   try {
     const { id } = req.params;
-    const deletedNote = await Note.findByIdAndDelete(id);
+    const deletedNote = await Note.findOneAndDelete({
+      _id: id,
+      userId: req.userId,
+    });
     if (!deletedNote) {
       return res.status(404).json({
         error: "No note found",
@@ -88,7 +93,7 @@ export const deleteNote = async (req, res) => {
 
 export const deleteAllNotes = async (req, res) => {
   try {
-    await Note.deleteMany();
+    await Note.deleteMany({ userId: req.userId });
     res.status(200).json({
       msg: "deleted succesfully",
     });
@@ -103,7 +108,7 @@ export const deleteAllNotes = async (req, res) => {
 
 export const getAllNotes = async (req, res) => {
   try {
-    const allNotes = await Note.find()
+    const allNotes = await Note.find({ userId: req.userId })
       .select("title body createdAt updatedAt ")
       .sort({ updatedAt: -1 });
 
@@ -119,7 +124,9 @@ export const getAllNotes = async (req, res) => {
 export const getNote = async (req, res) => {
   try {
     const { id } = req.params;
-    const note = await Note.findById(id).select("title body");
+    const note = await Note.findOne({ _id: id, userId: req.userId }).select(
+      "title body",
+    );
     if (!note) {
       return res.status(404).json({
         error: "Note not found",
