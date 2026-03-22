@@ -37,7 +37,7 @@ const Landing = () => {
   };
 
   return (
-    <div className="mx-auto w-4xl bg-black p-5 rounded-2xl hover:shadow-xl shadow-zinc-500">
+    <div className="mx-auto w-4xl bg-black p-5 rounded-2xl hover:shadow-lg shadow-zinc-500">
       <div className="flex gap-5">
         <div className="text-3xl hidden  font-serif  text-center md:flex flex-col justify-center gap-2">
           <h1>Welcome to notes app</h1>
