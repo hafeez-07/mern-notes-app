@@ -93,6 +93,7 @@ const Notes = ({ notes, setNotes }: NoteProps) => {
   return (
     <div className="max-w-5xl mx-auto mt-15 ">
       <div className="flex justify-between mb-3">
+       
         <h3 className="text-xl font-semibold">Your notes</h3>
         <button className="destructive-button" onClick={deleteAllNotes}>
           clear all

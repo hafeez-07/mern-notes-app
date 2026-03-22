@@ -100,7 +100,7 @@ const EditNote = ({ setNotes, notes }: Props) => {
           value={body}
           onChange={textAreaHandler}
           placeholder="write your note here.."
-          className="input-field resize-none max-h-60 "
+          className="input-field resize-none  max-h-60 "
         ></textarea>
         <input
           className="submit-button"

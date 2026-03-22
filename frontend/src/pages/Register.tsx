@@ -41,7 +41,7 @@ const Register = () => {
   };
 
   return (
-    <div className="mx-auto w-md bg-black p-5 rounded-2xl hover:shadow-lg shadow-zinc-500">
+    <div className="mx-auto w-md bg-black p-5 rounded-2xl hover:shadow-lg shadow-zinc-500 transition-all duration-300 ease-in">
       <h2 className="text-3xl text-center font-semibold mb-8 mt-2 ">
         Register Account
       </h2>
