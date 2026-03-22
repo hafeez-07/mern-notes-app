@@ -16,6 +16,12 @@ function App() {
   const { user } = useAuth();
 
   useEffect(() => {
+    
+    //if user is loggedout , return
+    if (!user) {
+      return;
+    }
+
     const loadNotes = async () => {
       const data = await fetchNotes();
       setNotes(data);
