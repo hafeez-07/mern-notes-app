@@ -53,6 +53,7 @@ const EditNote = ({ setNotes, notes }: Props) => {
     el.style.height = el.scrollHeight + 4 + "px";
     setBody(el.value);
   };
+  
 
   const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -100,7 +101,7 @@ const EditNote = ({ setNotes, notes }: Props) => {
           value={body}
           onChange={textAreaHandler}
           placeholder="write your note here.."
-          className="input-field resize-none  max-h-60 "
+          className="input-field resize-none  max-h-90 "
         ></textarea>
         <input
           className="submit-button"

@@ -6,7 +6,7 @@ const ProtectedRoutes = () => {
 
   if (loading) return <p>Loading...</p>;
   if (!user) {
-    return <Navigate to="/" />;
+    return <Navigate to="/" replace/>;
   }
   return <Outlet />;
 };
