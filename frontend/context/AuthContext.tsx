@@ -28,7 +28,6 @@ export const AuthProvider = ({ children }: Props) => {
       try {
         const data = await fetchUser();
         setUser(data);
-        console.log(data);
       } catch (err) {
         console.log("user not logged in");
         setUser(null);

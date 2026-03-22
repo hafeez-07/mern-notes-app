@@ -3,6 +3,7 @@ import { useState } from "react";
 import type { RegisteredUser } from "../types/user.ts";
 import { registerUser } from "../api/authApi.ts";
 import { toast } from "sonner";
+import useAuth from "../../hooks/useAuth.ts";
 
 const Register = () => {
   const [formData, setFormData] = useState<RegisteredUser>({
@@ -11,7 +12,9 @@ const Register = () => {
     email: "",
     password: "",
   });
+
   const navigate = useNavigate();
+  const { setUser } = useAuth();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
@@ -23,10 +26,12 @@ const Register = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      await registerUser(formData);
+      const user = await registerUser(formData);
       toast.success("registered succesfully", {
         duration: 2000,
       });
+    
+      setUser(user);
       navigate("/app");
     } catch (err) {
       toast.error("something went wrong", {
