@@ -31,7 +31,6 @@ export const getUser = async (req, res) => {
 export const updateUser = async (req, res) => {
   try {
     const userId = req.userId;
-    console.log(userId);
 
     if (!userId) {
       return res.status(401).json({
@@ -51,7 +50,6 @@ export const updateUser = async (req, res) => {
       },
       { new: true },
     ).select("-password");
-    console.log(updatedUser);
 
     if (!updatedUser) {
       return res.status(400).json({
@@ -90,7 +88,7 @@ export const uploadImage = async (req, res) => {
     }
 
     if (user.imagePublicId) {
-      cloudinary.uploader.destroy(user.imagePublicId);
+      await cloudinary.uploader.destroy(user.imagePublicId);
     }
 
     user.imageUrl = req.file.path;
@@ -115,6 +113,33 @@ export const deleteUser = async (req, res) => {
         error: "Unauthorized access",
       });
     }
+
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({
+        error: "No user found",
+      });
+    }
+
+    //delete user image
+
+    if (user.imagePublicId) {
+      await cloudinary.uploader.destroy(user.imagePublicId);
+    }
+
+    //delete user
+
+    await User.findByIdAndDelete(userId);
+
+    res.clearCookie("token", {
+      httpOnly: true,
+      sameSite: "strict",
+      secure: process.env.NODE_ENV === "production",
+    });
+
+    res.status(200).json({
+      msg: "User account deleted successfully",
+    });
   } catch (err) {
     res.status(500).json({
       error: err.message,

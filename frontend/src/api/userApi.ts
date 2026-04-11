@@ -56,3 +56,15 @@ export const uploadProfile = async (file: File) => {
 
   return data;
 };
+
+export const deleteUser = async () => {
+  const response = await fetch(`${BASE_URL}/deleteUser`, {
+    method: "DELETE",
+    credentials: "include",
+  });
+  const data = await response.json();
+  if (!response.ok) {
+    throw new Error(data.error || data.message || "Couldn't delete user");
+  }
+  return data;
+};

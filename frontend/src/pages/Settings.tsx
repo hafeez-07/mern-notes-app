@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import useAuth from "../../hooks/useAuth";
-import { updateUser, uploadProfile } from "../api/userApi";
+import { deleteUser, updateUser, uploadProfile } from "../api/userApi";
 import { toast } from "sonner";
 import { MdEmail } from "react-icons/md";
 import { FaCamera } from "react-icons/fa";
@@ -123,6 +123,34 @@ const Settings = () => {
     }
   };
 
+  const deleteAccountHandler = () => {
+    toast.warning("Delete account?", {
+      description: "This action is irreversible",
+      action: {
+        label: "Confirm",
+        onClick: async () => {
+          try {
+            await deleteUser();
+            setUser(null);
+            toast.success("Account deleted successfully", { duration: 1200 });
+          } catch (err) {
+            if (err instanceof Error) {
+              toast.error(err.message);
+              console.log(err.message);
+            } else {
+              toast.error("Could not delete account");
+              console.log("unknown error:", err);
+            }
+          }
+        },
+      },
+      cancel: {
+        label: "cancel",
+        onClick: () => {},
+      },
+    });
+  };
+
   return (
     <div className="mx-auto max-w-5xl px-3">
       <h2 className="text-2xl font-semibold">Account Settings</h2>
@@ -216,7 +244,9 @@ const Settings = () => {
             This action is irreversible. Your account and all associated data
             will be permanently deleted.
           </p>
-          <button className="destructive-button">Delete Account</button>
+          <button onClick={deleteAccountHandler} className="destructive-button">
+            Delete Account
+          </button>
         </div>
       </div>
     </div>
