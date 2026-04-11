@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const connectDb = async () => {
   try {
-    mongoose.connect("mongodb://127.0.0.1/notesApp");
+    mongoose.connect(process.env.MONGO_URI);
     console.log("Database connected");
   } catch (err) {
     console.log("Database connection failed");

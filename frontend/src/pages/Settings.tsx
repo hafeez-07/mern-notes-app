@@ -3,6 +3,7 @@ import useAuth from "../../hooks/useAuth";
 import { updateUser, uploadProfile } from "../api/userApi";
 import { toast } from "sonner";
 import { MdEmail } from "react-icons/md";
+import { FaCamera } from "react-icons/fa";
 
 type UserForm = {
   fullname: string;
@@ -13,6 +14,7 @@ type UserForm = {
 
 const Settings = () => {
   const fileInputRef = useRef<HTMLInputElement | null>(null);
+
   const { user, setUser } = useAuth();
   const [formData, setFormData] = useState<UserForm>({
     fullname: "",
@@ -55,7 +57,7 @@ const Settings = () => {
     try {
       const updatedUser = await updateUser(dataToSubmit);
       setUser(updatedUser);
-      toast.success("Data updated", {
+      toast.success("Personal Info updated", {
         duration: 1000,
       });
     } catch (err) {
@@ -78,9 +80,24 @@ const Settings = () => {
     const file = e.target.files?.[0];
     if (!file) return;
 
+    const previousImage = user?.imageUrl;
+
+    //instant preview
+    const previewURL = URL.createObjectURL(file);
+
+    //show preview
+    setUser((prev) => {
+      if (!prev) return null;
+      return {
+        ...prev,
+        imageUrl: previewURL,
+      };
+    });
+
     // Upload in background
     try {
       const data = await uploadProfile(file);
+
       setUser((prev) => {
         if (!prev) return null;
         return {
@@ -88,11 +105,19 @@ const Settings = () => {
           imageUrl: data.imageUrl, // Replace with actual URL from server
         };
       });
-      toast.success("Profile picture updated", {
+      URL.revokeObjectURL(previewURL);
+      toast.success("Profile image updated", {
         duration: 1000,
       });
     } catch (err) {
-      toast.error("could not upload ");
+      toast.error("could not upload profile image");
+      setUser((prev) => {
+        if (!prev) return null;
+        return {
+          ...prev,
+          imageUrl: previousImage,
+        };
+      });
     }
   };
 
@@ -100,30 +125,32 @@ const Settings = () => {
     <div className="max-w-5xl mx-auto px-3">
       <h2 className="text-2xl font-semibold">Account Settings</h2>
       <p className="mt-1 text-zinc-400">
-        Manage your personal information and account preferences.
+        Update your profile details and account preferences.
       </p>
-      <div className="flex flex-col sm:flex-row justify-between mt-8 gap-10">
-        <div className="shadow-lg shadow-black flex flex-col gap-1 items-center border py-5 px-20 border-zinc-800 bg-zinc-900 rounded-2xl">
-          <div className="w-32 h-32 bg-black rounded-[50%] mb-4">
+      <div className="flex flex-col sm:flex-row justify-between mt-8 gap-12">
+        <div className="shadow-lg space-y-1 shadow-black flex flex-col gap-1 items-center border py-5 px-20 border-zinc-800 bg-zinc-900 rounded-2xl">
+          <div className="w-32 h-32 rounded-full mb-4">
             <img
               src={user?.imageUrl}
               alt="dp"
-              className="w-32 h-32 object-contain rounded-[50%] ring-3 ring-orange-400"
+              className="w-32 h-32 object-cover rounded-[50%] ring-3 ring-orange-400"
             />
           </div>
 
-          <div>{user?.fullname}</div>
-          <div className="text-zinc-400">{user?.username}</div>
-          <button
-            onClick={handleClick}
-            className="bg-linear-to-br from-blue-500 to-blue-600  p-3 rounded text-center  w-full"
-          >
-            upload picture
-          </button>
-          <div className="mt-2 flex items-center gap-1 ">
+          <div className="text-lg font-semibold">{user?.fullname}</div>
+          <div className="text-zinc-400">@{user?.username}</div>
+          <div className="flex items-center gap-1 ">
             <MdEmail />
             <div>{user?.email}</div>
           </div>
+          <button
+            onClick={handleClick}
+            className="flex items-center gap-2 bg-linear-to-br from-blue-500 to-blue-600  p-3 rounded text-center  w-full"
+          >
+            <FaCamera />
+            <div>Change photo</div>
+          </button>
+
           <input
             type="file"
             name="profile"
@@ -178,6 +205,17 @@ const Settings = () => {
           </div>
           <input type="submit" className="submit-button" />
         </form>
+      </div>
+      <div className="border border-red-950 bg-red-900/20 p-5 rounded  mt-10">
+        <h3 className="text-red-600 text-xl">Danger zone ⚠️</h3>
+
+        <div className="flex justify-between mt-3">
+          <p className="text-red-400">
+            This action is irreversible. Your account and all associated data
+            will be permanently deleted.
+          </p>
+          <button className="destructive-button">Delete Account</button>
+        </div>
       </div>
     </div>
   );
