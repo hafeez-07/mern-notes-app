@@ -10,9 +10,9 @@ type Props = {
 
 const RootLayout = ({ setNotes }: Props) => {
   return (
-    <div className="flex flex-col min-h-screen ">
+    <div className="flex min-h-screen flex-col">
       <Navbar setNotes={setNotes} />
-      <main className=" grow bg-linear-to-bl from-zinc-900 to-zinc-800 text-white  py-8">
+      <main className="grow bg-linear-to-bl from-zinc-900 to-zinc-800 py-8 text-white">
         <Toaster position="top-center" richColors />
         <Outlet />
       </main>

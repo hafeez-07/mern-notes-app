@@ -2,13 +2,13 @@
 
 @layer components {
   .input-field {
-    @apply bg-zinc-800  rounded p-2 focus:ring-2 focus:ring-orange-400 focus:bg-zinc-900 outline-none transition-all duration-300 ease-in;
+    @apply rounded bg-zinc-800 p-2 transition-all duration-300 ease-in outline-none focus:bg-zinc-900 focus:ring-2 focus:ring-orange-400;
   }
   .submit-button {
-    @apply border border-orange-400 bg-orange-500 font-semibold text-white rounded py-1 cursor-pointer hover:opacity-90 transition duration-300;
+    @apply cursor-pointer rounded border border-orange-400 bg-orange-500 py-1 font-semibold text-white transition duration-300 hover:opacity-90;
   }
   .destructive-button {
-    @apply cursor-pointer text-white bg-red-500 px-1 py-0.5 hover:opacity-80 transition duration-300 rounded;
+    @apply cursor-pointer rounded bg-red-500 px-1 py-0.5 text-white transition duration-300 hover:opacity-80;
   }
 }
 
@@ -17,20 +17,18 @@
   width: 8px;
 }
 
-
 /* background color */
-::-webkit-scrollbar-track{
-  background-color: #18181b ;
+::-webkit-scrollbar-track {
+  background-color: #18181b;
 }
 
-
 /* thumb scroll handle */
-::-webkit-scrollbar-thumb{
+::-webkit-scrollbar-thumb {
   background-color: #3f3f46;
-border-radius:9999px;
+  border-radius: 9999px;
 }
 
 /* thumb scroll hover */
-::-webkit-scrollbar-thumb:hover{
+::-webkit-scrollbar-thumb:hover {
   background-color: #424249;
 }

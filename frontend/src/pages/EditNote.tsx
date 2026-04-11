@@ -53,7 +53,6 @@ const EditNote = ({ setNotes, notes }: Props) => {
     el.style.height = el.scrollHeight + 4 + "px";
     setBody(el.value);
   };
-  
 
   const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -81,12 +80,12 @@ const EditNote = ({ setNotes, notes }: Props) => {
   };
 
   return (
-    <div className="max-w-5xl  bg-zinc-900 mx-auto  rounded-xl">
-      <h2 className="text-2xl font-semibold border-b py-2 px-4 border-zinc-700">
+    <div className="mx-auto max-w-5xl rounded-xl bg-zinc-900">
+      <h2 className="border-b border-zinc-700 px-4 py-2 text-2xl font-semibold">
         Update Note
       </h2>
 
-      <form onSubmit={submitHandler} className="flex flex-col gap-2  p-4 ">
+      <form onSubmit={submitHandler} className="flex flex-col gap-2 p-4">
         <input
           type="text"
           name="title"
@@ -101,13 +100,9 @@ const EditNote = ({ setNotes, notes }: Props) => {
           value={body}
           onChange={textAreaHandler}
           placeholder="write your note here.."
-          className="input-field resize-none  max-h-90 "
+          className="input-field max-h-90 resize-none"
         ></textarea>
-        <input
-          className="submit-button"
-          type="submit"
-          value="update"
-        />
+        <input className="submit-button" type="submit" value="update" />
       </form>
     </div>
   );

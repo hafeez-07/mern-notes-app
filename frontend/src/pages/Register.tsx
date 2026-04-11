@@ -30,7 +30,7 @@ const Register = () => {
       toast.success("registered successfully", {
         duration: 2000,
       });
-    
+
       setUser(user);
       navigate("/app");
     } catch (err) {
@@ -41,11 +41,11 @@ const Register = () => {
   };
 
   return (
-    <div className="mx-auto w-md bg-black p-5 rounded-2xl hover:shadow-lg shadow-zinc-500 transition-all duration-300 ease-in">
-      <h2 className="text-3xl text-center font-semibold mb-8 mt-2 ">
+    <div className="mx-auto w-md rounded-2xl bg-black p-5 shadow-zinc-500 transition-all duration-300 ease-in hover:shadow-lg">
+      <h2 className="mt-2 mb-8 text-center text-3xl font-semibold">
         Register Account
       </h2>
-      <form onSubmit={handleSubmit} className="flex flex-col gap-5 ">
+      <form onSubmit={handleSubmit} className="flex flex-col gap-5">
         <input
           type="text"
           name="fullname"
@@ -83,7 +83,7 @@ const Register = () => {
         />
         <input type="submit" value="Register" className="submit-button px-1" />
       </form>
-      <div className="text-center mt-2">
+      <div className="mt-2 text-center">
         Already have an account?
         <Link to="/" className="text-blue-600">
           {" "}

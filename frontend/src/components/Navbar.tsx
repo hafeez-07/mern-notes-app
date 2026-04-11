@@ -23,16 +23,16 @@ const Navbar = ({ setNotes }: Props) => {
   };
 
   return (
-    <div className="bg-gray-950 text-white py-2 px-5 border-b border-zinc-600">
-      <div className=" flex justify-between items-center mx-auto">
+    <div className="border-b border-zinc-600 bg-gray-950 px-5 py-2 text-white">
+      <div className="mx-auto flex items-center justify-between">
         <h1 className="text-2xl font-bold">Notes App</h1>
 
-        <div className="flex gap-5 items-center">
+        <div className="flex items-center gap-5">
           <div>{user?.username}</div>
           <NavLink to="/app" className="hover:text-orange-400">
             Home
           </NavLink>
-          <NavLink to="settings" >Settings</NavLink>
+          <NavLink to="settings">Settings</NavLink>
           <button onClick={handleLogout} className="destructive-button">
             Logout
           </button>

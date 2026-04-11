@@ -106,3 +106,18 @@ export const uploadImage = async (req, res) => {
     });
   }
 };
+
+export const deleteUser = async (req, res) => {
+  try {
+    const userId = req.userId;
+    if (!userId) {
+      return res.status(401).json({
+        error: "Unauthorized access",
+      });
+    }
+  } catch (err) {
+    res.status(500).json({
+      error: err.message,
+    });
+  }
+};

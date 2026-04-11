@@ -37,16 +37,16 @@ const Landing = () => {
   };
 
   return (
-    <div className="mx-auto w-4xl bg-black p-5 rounded-2xl hover:shadow-lg shadow-zinc-500 transition-all duration-300 ease-in">
+    <div className="mx-auto w-4xl rounded-2xl bg-black p-5 shadow-zinc-500 transition-all duration-300 ease-in hover:shadow-lg">
       <div className="flex gap-5">
-        <div className="text-3xl hidden  font-serif  text-center md:flex flex-col justify-center gap-2">
+        <div className="hidden flex-col justify-center gap-2 text-center font-serif text-3xl md:flex">
           <h1>Welcome to notes app</h1>
           <p>Organize your thoughts efficiently</p>
           <p></p>
         </div>
         <div className="grow">
-          <h2 className="p-2 text-xl mb-2">Log in to notes app</h2>
-          <form onSubmit={submitHandler} className="flex flex-col gap-5 ">
+          <h2 className="mb-2 p-2 text-xl">Log in to notes app</h2>
+          <form onSubmit={submitHandler} className="flex flex-col gap-5">
             <input
               type="email"
               name="email"
@@ -67,7 +67,7 @@ const Landing = () => {
             />
             <input type="submit" value="Login" className="submit-button px-1" />
           </form>
-          <div className="text-center mt-2">
+          <div className="mt-2 text-center">
             Don't have an account?
             <Link to="/register" className="text-blue-600">
               {" "}

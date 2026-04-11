@@ -84,7 +84,6 @@ const Settings = () => {
 
     //instant preview
     const previewURL = URL.createObjectURL(file);
-   
 
     //show preview
     setUser((prev) => {
@@ -106,7 +105,7 @@ const Settings = () => {
           imageUrl: data.imageUrl, // Replace with actual URL from server
         };
       });
-    
+
       toast.success("Profile image updated", {
         duration: 1000,
       });
@@ -119,37 +118,36 @@ const Settings = () => {
           imageUrl: previousImage,
         };
       });
-    }
-    finally{
+    } finally {
       URL.revokeObjectURL(previewURL);
     }
   };
 
   return (
-    <div className="max-w-5xl mx-auto px-3">
+    <div className="mx-auto max-w-5xl px-3">
       <h2 className="text-2xl font-semibold">Account Settings</h2>
       <p className="mt-1 text-zinc-400">
         Update your profile details and account preferences.
       </p>
-      <div className="flex flex-col sm:flex-row justify-between mt-8 gap-12">
-        <div className="shadow-lg space-y-1 shadow-black flex flex-col gap-1 items-center border py-5 px-20 border-zinc-800 bg-zinc-900 rounded-2xl">
-          <div className="w-32 h-32 rounded-full mb-4">
+      <div className="mt-8 flex flex-col justify-between gap-12 sm:flex-row">
+        <div className="flex flex-col items-center gap-1 space-y-1 rounded-2xl border border-zinc-800 bg-zinc-900 px-20 py-5 shadow-lg shadow-black">
+          <div className="mb-4 h-32 w-32 rounded-full">
             <img
               src={user?.imageUrl}
               alt="dp"
-              className="w-32 h-32 object-cover rounded-[50%] ring-3 ring-orange-400"
+              className="h-32 w-32 rounded-[50%] object-cover ring-3 ring-orange-400"
             />
           </div>
 
           <div className="text-lg font-semibold">{user?.fullname}</div>
           <div className="text-zinc-400">@{user?.username}</div>
-          <div className="flex items-center gap-1 ">
+          <div className="flex items-center gap-1">
             <MdEmail />
             <div>{user?.email}</div>
           </div>
           <button
             onClick={handleClick}
-            className="cursor-pointer flex items-center gap-2 bg-linear-to-br from-blue-500 to-blue-600  p-3 rounded text-center  w-full"
+            className="flex w-full cursor-pointer items-center gap-2 rounded bg-linear-to-br from-blue-500 to-blue-600 p-3 text-center"
           >
             <FaCamera />
             <div>Change photo</div>
@@ -165,7 +163,7 @@ const Settings = () => {
         </div>
         <form
           onSubmit={submitHandler}
-          className="flex flex-col  grow gap-4 border border-zinc-800 bg-zinc-900 rounded-2xl p-5 sm:p-10"
+          className="flex grow flex-col gap-4 rounded-2xl border border-zinc-800 bg-zinc-900 p-5 sm:p-10"
         >
           <div className="grid gap-1">
             <label className="text-sm text-zinc-400">Username</label>
@@ -210,10 +208,10 @@ const Settings = () => {
           <input type="submit" className="submit-button" />
         </form>
       </div>
-      <div className="border border-red-950 bg-red-900/20 p-5 rounded  mt-10">
-        <h3 className="text-red-600 text-xl">Danger zone ⚠️</h3>
+      <div className="mt-10 rounded border border-red-950 bg-red-900/20 p-5">
+        <h3 className="text-xl text-red-600">Danger zone ⚠️</h3>
 
-        <div className="flex justify-between mt-3">
+        <div className="mt-3 flex justify-between">
           <p className="text-red-400">
             This action is irreversible. Your account and all associated data
             will be permanently deleted.

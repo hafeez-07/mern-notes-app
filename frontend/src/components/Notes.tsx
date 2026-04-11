@@ -91,9 +91,8 @@ const Notes = ({ notes, setNotes }: NoteProps) => {
   };
 
   return (
-    <div className="max-w-5xl mx-auto mt-15 ">
-      <div className="flex justify-between mb-3">
-       
+    <div className="mx-auto mt-15 max-w-5xl">
+      <div className="mb-3 flex justify-between">
         <h3 className="text-xl font-semibold">Your notes</h3>
         <button className="destructive-button" onClick={deleteAllNotes}>
           clear all
@@ -101,19 +100,19 @@ const Notes = ({ notes, setNotes }: NoteProps) => {
       </div>
 
       {notes.length > 0 ? (
-        <div className=" grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
           {notes.map((note) => (
             <div
               key={note._id}
-              className="p-5 space-y-3 mt-5 rounded-xl hover:scale-[1.02] transition-all duration-300 shadow-lg  shadow-black flex flex-col bg-white/5  backdrop-blur-md border border-white/10"
+              className="mt-5 flex flex-col space-y-3 rounded-xl border border-white/10 bg-white/5 p-5 shadow-lg shadow-black backdrop-blur-md transition-all duration-300 hover:scale-[1.02]"
             >
-              <h4 className="font-semibold text-lg border-zinc-700 pb-1">
+              <h4 className="border-zinc-700 pb-1 text-lg font-semibold">
                 {note.title}
               </h4>
-              <div className="text-sm grow line-clamp-3  border-zinc-700">
+              <div className="line-clamp-3 grow border-zinc-700 text-sm">
                 {note.body}
               </div>
-              <div className="text-xs flex justify-between  mt-auto">
+              <div className="mt-auto flex justify-between text-xs">
                 <div>
                   {new Date(note.updatedAt).toLocaleDateString("en-US", {
                     day: "numeric",
@@ -122,15 +121,14 @@ const Notes = ({ notes, setNotes }: NoteProps) => {
                   })}
                 </div>
                 <div className="flex gap-3">
-                  <button className=" rounded hover:cursor-pointer hover:text-blue-500 transition-all duration-300">
+                  <button className="rounded transition-all duration-300 hover:cursor-pointer hover:text-blue-500">
                     <Link to={`edit/${note._id}`}>
-                      <FaPen className=" text-sky-400 hover:text-sky-600 transition duration-300 ease-in" />
+                      <FaPen className="text-sky-400 transition duration-300 ease-in hover:text-sky-600" />
                     </Link>
-                    
                   </button>
-                  <button className=" rounded hover:cursor-pointer  hover:text-red-500 transition-all duration-300">
+                  <button className="rounded transition-all duration-300 hover:cursor-pointer hover:text-red-500">
                     <FaTrash
-                    className="text-zinc-500 hover:text-zinc-300 transition duration-300 ease-in"
+                      className="text-zinc-500 transition duration-300 ease-in hover:text-zinc-300"
                       onClick={() => deleteOneNote(note._id)}
                     />
                   </button>
@@ -140,7 +138,7 @@ const Notes = ({ notes, setNotes }: NoteProps) => {
           ))}
         </div>
       ) : (
-        <div className="text-2xl text-zinc-400 text-center mt-10">
+        <div className="mt-10 text-center text-2xl text-zinc-400">
           No notes yet. Start by creating one ✨
         </div>
       )}
