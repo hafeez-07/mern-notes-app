@@ -28,11 +28,12 @@ const Navbar = ({ setNotes }: Props) => {
         <h1 className="text-2xl font-bold">Notes App</h1>
 
         <div className="flex items-center gap-5">
-          <div>{user?.username}</div>
           <NavLink to="/app" className="hover:text-orange-400">
             Home
           </NavLink>
-          <NavLink to="settings">Settings</NavLink>
+          <NavLink to="settings" className="hover:text-orange-400">
+            Settings
+          </NavLink>
           <button onClick={handleLogout} className="destructive-button">
             Logout
           </button>
