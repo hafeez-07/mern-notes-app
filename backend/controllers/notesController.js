@@ -2,7 +2,7 @@ import Note from "../models/noteModel.js";
 
 export const getHome = (req, res) => {
   res.status(200).json({
-    msg: "Api working",
+    message: "Api working",
   });
 };
 
@@ -95,7 +95,7 @@ export const deleteAllNotes = async (req, res) => {
   try {
     await Note.deleteMany({ userId: req.userId });
     res.status(200).json({
-      msg: "deleted successfully",
+      message: "deleted successfully",
     });
   } catch (err) {
     res.status(500).json({

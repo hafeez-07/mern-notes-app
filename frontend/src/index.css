@@ -10,9 +10,12 @@
   .destructive-button {
     @apply cursor-pointer rounded bg-red-500 px-1 py-0.5 text-white transition duration-300 hover:opacity-80;
   }
+  .error-message {
+    @apply text-xs text-red-400;
+  }
 }
 
-/* srollbar width */
+/* scrollbar width */
 ::-webkit-scrollbar {
   width: 8px;
 }

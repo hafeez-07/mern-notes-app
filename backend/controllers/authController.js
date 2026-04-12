@@ -21,12 +21,18 @@ export const registerUser = async (req, res) => {
     });
 
     if (existingUser) {
-      return res.status(400).json({
-        error:
-          existingUser.email == email
-            ? "Email is already registered"
-            : "Username is not available",
-      });
+      if (existingUser.email === email) {
+        return res.status(400).json({
+          field: "email",
+          error: "Email is already registered",
+        });
+      }
+      if (existingUser.username === username) {
+        return res.status(400).json({
+          field: "username",
+          error: "Username is not available",
+        });
+      }
     }
 
     //hash password
@@ -103,6 +109,6 @@ export const logoutUser = (req, res) => {
     secure: process.env.NODE_ENV === "production",
   });
   res.status(200).json({
-    msg: "logout successful",
+    message: "logout successful",
   });
 };

@@ -15,7 +15,7 @@ export const registerUser = async (user: RegisteredUser) => {
   });
   const data = await response.json();
   if (!response.ok) {
-    throw new Error(data.message || "Could not create an account");
+    throw data;
   }
 
   return data;

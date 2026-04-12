@@ -35,7 +35,7 @@ export const updateUser = async (req, res) => {
 
     if (!userId) {
       return res.status(401).json({
-        msg: "Unauthorized access",
+        message: "Unauthorized access",
       });
     }
     const { fullname, username, email, age } = req.body;
@@ -147,7 +147,7 @@ export const deleteUser = async (req, res) => {
     });
 
     res.status(200).json({
-      msg: "User account deleted successfully",
+      message: "User account deleted successfully",
     });
   } catch (err) {
     res.status(500).json({
