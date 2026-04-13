@@ -9,6 +9,7 @@ const Landing = () => {
     email: "",
     password: "",
   });
+  const [error, setError] = useState("");
 
   const navigate = useNavigate();
   const { setUser } = useAuth();
@@ -21,18 +22,15 @@ const Landing = () => {
   };
 
   const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
+    setError("");
     e.preventDefault();
     try {
       const userData = await loginUser(formData);
 
       setUser(userData);
       navigate("/app");
-    } catch (err) {
-      if (err instanceof Error) {
-        throw new Error(err.message);
-      } else {
-        throw new Error("something went wrong");
-      }
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : "could not login");
     }
   };
 
@@ -47,6 +45,11 @@ const Landing = () => {
         <div className="grow">
           <h2 className="mb-2 p-2 text-xl">Log in to notes app</h2>
           <form onSubmit={submitHandler} className="flex flex-col gap-5">
+            <div
+              className={`error-message overflow-hidden text-center transition duration-300 ease-out ${error ? "max-h-8 opacity-100" : "max-h-0 opacity-0"} `}
+            >
+              {error}
+            </div>
             <input
               type="email"
               name="email"

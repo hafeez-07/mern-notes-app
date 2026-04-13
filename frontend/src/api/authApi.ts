@@ -32,7 +32,8 @@ export const loginUser = async (user: LoggedInUser) => {
   });
   const data = await response.json();
   if (!response.ok) {
-    throw new Error(data.message || "Could not login");
+    
+    throw new Error(data.error || "couldn't log in");
   }
   return data;
 };
