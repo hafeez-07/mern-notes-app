@@ -75,13 +75,13 @@ const Note = ({ notes, setNotes }: NoteProps) => {
   return (
     <div className="mx-auto max-w-5xl px-5">
       <div className="mt-5 flex flex-col space-y-3 rounded-xl border border-white/10 bg-white/5 p-5 shadow-lg shadow-black backdrop-blur-md transition-all duration-300">
-        <h4 className="border-zinc-700 pb-1 text-lg font-semibold">
+        <h4 className="border-zinc-700 pb-1 text-3xl font-semibold">
           {note.title}
         </h4>
-        <div className="line-clamp-3 grow border-zinc-700 text-sm">
+        <div className="line-clamp-3 grow border-zinc-700 text-md">
           {note.body}
         </div>
-        <div className="mt-auto flex justify-between text-xs">
+        <div className="mt-auto flex justify-between text-sm">
           <div>
             {new Date(note.updatedAt).toLocaleDateString("en-US", {
               day: "numeric",

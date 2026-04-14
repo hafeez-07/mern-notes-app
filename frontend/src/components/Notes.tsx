@@ -93,21 +93,22 @@ const Notes = ({ notes, setNotes }: NoteProps) => {
   return (
     <div className="mx-auto mt-15 max-w-5xl">
       <div className="mb-3 flex justify-between">
-        <h3 className="text-xl font-semibold">Your notes</h3>
+        <h3 className="text-2xl font-semibold">Your notes</h3>
         <button className="destructive-button" onClick={deleteAllNotes}>
           clear all
         </button>
       </div>
+      
 
       {notes.length > 0 ? (
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
           {notes.map((note) => (
             <div
               key={note._id}
-              className="mt-5 flex flex-col rounded-xl border border-white/10 bg-white/5 p-5 shadow-lg shadow-black backdrop-blur-md transition-all duration-300 hover:scale-[1.02]"
+              className="mt-5 flex flex-col rounded-xl border border-white/10 bg-white/10 p-5 shadow-lg shadow-black backdrop-blur-md transition-all duration-300 hover:scale-[1.02]"
             >
               <Link className="mb-3 space-y-3" to={`note/${note._id}`}>
-                <h4 className="border-zinc-700 pb-1 text-lg font-semibold">
+                <h4 className="border-zinc-700 pb-1 text-xl font-semibold">
                   {note.title}
                 </h4>
                 <div className="line-clamp-3 grow border-zinc-700 text-sm">

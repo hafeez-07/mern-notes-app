@@ -2,10 +2,13 @@
 
 @layer components {
   .auth-input-field {
-    @apply rounded-lg border border-zinc-700 bg-zinc-800/50 px-4 py-3 text-white transition  duration-300 ease-in outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-500/30;
+    @apply rounded-lg border border-zinc-700 bg-zinc-800/50 px-4 py-3 text-white transition duration-300 ease-in outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-500/30;
   }
   .auth-submit-button {
     @apply rounded-lg bg-orange-500 py-3 font-medium text-white shadow-lg shadow-orange-500/30 transition-all duration-300 ease-in hover:scale-[1.02] hover:bg-orange-600;
+  }
+  .submit-button {
+    @apply rounded-lg bg-orange-500 py-3 font-medium text-white transition-all duration-300 ease-in hover:scale-[1.02] hover:bg-orange-600;
   }
   .destructive-button {
     @apply cursor-pointer rounded bg-red-500 px-1 py-0.5 text-white transition duration-300 hover:opacity-80;
