@@ -2,10 +2,10 @@ import { Outlet } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
-import type { Note } from "../types/note";
+import type { NoteType } from "../types/note";
 
 type Props = {
-  setNotes: React.Dispatch<React.SetStateAction<Note[]>>;
+  setNotes: React.Dispatch<React.SetStateAction<NoteType[]>>;
 };
 
 const RootLayout = ({ setNotes }: Props) => {

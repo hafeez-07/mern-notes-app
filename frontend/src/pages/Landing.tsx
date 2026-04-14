@@ -5,7 +5,6 @@ import { loginUser } from "../api/authApi";
 import useAuth from "../../hooks/useAuth";
 import illustration from "../../public/images/note_illustration.png";
 import { FaCheck } from "react-icons/fa";
-import { RxDividerVertical } from "react-icons/rx";
 
 const Landing = () => {
   const [formData, setFormData] = useState<LoggedInUser>({
@@ -38,9 +37,8 @@ const Landing = () => {
 
   return (
     <div className="flex min-h-screen w-screen bg-black">
-     
       {/* LEFT SIDE (60%) */}
-      <div className="relative hidden h-screen w-[60%] items-center justify-center overflow-hidden bg-black md:flex ">
+      <div className="relative hidden h-screen w-[60%] items-center justify-center overflow-hidden bg-black md:flex">
         {/* Image */}
         <img
           src={illustration}
@@ -56,15 +54,15 @@ const Landing = () => {
           </p>
           <div className="flex flex-col gap-1 text-zinc-400">
             <div className="flex items-center gap-2">
-              <FaCheck className="text-orange-500"/>
+              <FaCheck className="text-orange-500" />
               <p>Fast & simple note taking</p>
             </div>
             <div className="flex items-center gap-2">
-              <FaCheck className="text-orange-500"/>
+              <FaCheck className="text-orange-500" />
               <p>Secure authentication</p>
             </div>
             <div className="flex items-center gap-2">
-              <FaCheck className="text-orange-500"/>
+              <FaCheck className="text-orange-500" />
               <p>Clean & distraction free UI</p>
             </div>
           </div>
@@ -72,12 +70,9 @@ const Landing = () => {
       </div>
 
       {/* RIGHT SIDE (40%) */}
-      <div className=" relative flex h-screen w-full items-center justify-center bg-linear-to-br from-zinc-900 via-zinc-800 to-black px-6 md:w-[40%] overflow-hidden">
-      
-      <div className="absolute   -left-20 top-1/2 h -translate-y-1/2 h-100 w-100 bg-orange-500/20 blur-3xl rounded-full"></div>
-       <div className="relative w-full max-w-md rounded-2xl border border-white/10 bg-white/5 p-8 shadow-2xl backdrop-blur-xl overflow-hidden">
-     
-  
+      <div className="relative flex h-screen w-full items-center justify-center overflow-hidden bg-linear-to-br from-zinc-900 via-zinc-800 to-black px-6 md:w-[40%]">
+        <div className="h absolute top-1/2 -left-20 h-100 w-100 -translate-y-1/2 rounded-full bg-orange-500/20 blur-3xl"></div>
+        <div className="relative w-full max-w-md overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-8 shadow-2xl backdrop-blur-xl">
           <h2 className="mb-6 text-center text-xl font-semibold text-white">
             Log in to your account
           </h2>
@@ -100,7 +95,7 @@ const Landing = () => {
               onChange={handleChange}
               placeholder="Email address"
               required
-              className="rounded-lg border border-zinc-700 bg-zinc-800/50 px-4 py-3 text-white transition-all outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-500/30"
+              className="auth-input-field"
             />
 
             {/* PASSWORD */}
@@ -111,13 +106,13 @@ const Landing = () => {
               onChange={handleChange}
               placeholder="Password"
               required
-              className="rounded-lg border border-zinc-700 bg-zinc-800/50 px-4 py-3 text-white transition-all outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-500/30"
+              className="auth-input-field"
             />
 
             {/* BUTTON */}
             <button
               type="submit"
-              className="rounded-lg bg-orange-500 py-3 font-medium text-white shadow-lg shadow-orange-500/30 transition-all hover:scale-[1.02] hover:bg-orange-600"
+              className="auth-submit-button"
             >
               Login
             </button>

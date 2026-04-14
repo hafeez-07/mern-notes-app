@@ -142,7 +142,7 @@ const Notes = ({ notes, setNotes }: NoteProps) => {
           ))}
         </div>
       ) : (
-        <div className="mt-10 text-center text-2xl text-zinc-400">
+        <div className="mt-10 text-center text-lg sm:text-2xl text-zinc-400">
           No notes yet. Start by creating one ✨
         </div>
       )}
