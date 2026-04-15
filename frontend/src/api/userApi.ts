@@ -1,6 +1,6 @@
-const BASE_URL = "http://localhost:3000";
-
 import type { User } from "../types/user";
+
+const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 export const fetchUser = async () => {
   const response = await fetch(`${BASE_URL}/getUser`, {
@@ -64,7 +64,7 @@ export const deleteUser = async () => {
   });
   const data = await response.json();
   if (!response.ok) {
-    throw new Error( data.message || "Couldn't delete user");
+    throw new Error(data.message || "Couldn't delete user");
   }
   return data;
 };
