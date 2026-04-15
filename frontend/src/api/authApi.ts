@@ -1,10 +1,10 @@
 import type { LoggedInUser, RegisteredUser } from "../types/user";
 
-const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+const API = import.meta.env.VITE_API_BASE_URL;
 
 //register user
 export const registerUser = async (user: RegisteredUser) => {
-  const response = await fetch(`${BASE_URL}/register`, {
+  const response = await fetch(`${API}/register`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -22,7 +22,7 @@ export const registerUser = async (user: RegisteredUser) => {
 };
 
 export const loginUser = async (user: LoggedInUser) => {
-  const response = await fetch(`${BASE_URL}/login`, {
+  const response = await fetch(`${API}/login`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -40,7 +40,7 @@ export const loginUser = async (user: LoggedInUser) => {
 //logout
 
 export const logoutUser = async () => {
-  const response = await fetch(`${BASE_URL}/logout`, {
+  const response = await fetch(`${API}/logout`, {
     credentials: "include",
   });
   const data = await response.json();

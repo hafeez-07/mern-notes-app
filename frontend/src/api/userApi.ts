@@ -1,9 +1,9 @@
 import type { User } from "../types/user";
 
-const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+const API = import.meta.env.VITE_API_BASE_URL;
 
 export const fetchUser = async () => {
-  const response = await fetch(`${BASE_URL}/getUser`, {
+  const response = await fetch(`${API}/getUser`, {
     credentials: "include",
   });
 
@@ -20,7 +20,7 @@ export const fetchUser = async () => {
 };
 
 export const updateUser = async (user: User) => {
-  const response = await fetch(`${BASE_URL}/updateUser`, {
+  const response = await fetch(`${API}/updateUser`, {
     method: "PUT",
     credentials: "include",
     headers: {
@@ -42,7 +42,7 @@ export const uploadProfile = async (file: File) => {
   const formData = new FormData();
   formData.append("profile", file);
 
-  const response = await fetch(`${BASE_URL}/upload`, {
+  const response = await fetch(`${API}/upload`, {
     method: "POST",
     credentials: "include",
     body: formData,
@@ -58,7 +58,7 @@ export const uploadProfile = async (file: File) => {
 };
 
 export const deleteUser = async () => {
-  const response = await fetch(`${BASE_URL}/deleteUser`, {
+  const response = await fetch(`${API}/deleteUser`, {
     method: "DELETE",
     credentials: "include",
   });

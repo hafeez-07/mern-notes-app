@@ -1,9 +1,9 @@
 import type { CreateNote, UpdateNote } from "../types/note";
 
-const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+const API = import.meta.env.VITE_API_BASE_URL;
 
 export const fetchNotes = async () => {
-  const response = await fetch(`${BASE_URL}/read`, {
+  const response = await fetch(`${API}/read`, {
     credentials: "include",
   });
   if (!response.ok) {
@@ -13,7 +13,7 @@ export const fetchNotes = async () => {
 };
 
 export const createNote = async (note: CreateNote) => {
-  const response = await fetch(`${BASE_URL}/add`, {
+  const response = await fetch(`${API}/add`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -28,7 +28,7 @@ export const createNote = async (note: CreateNote) => {
 };
 
 export const deleteNote = async (id: string) => {
-  const response = await fetch(`${BASE_URL}/delete/${id}`, {
+  const response = await fetch(`${API}/delete/${id}`, {
     method: "DELETE",
     credentials: "include",
   });
@@ -41,7 +41,7 @@ export const deleteNote = async (id: string) => {
 };
 
 export const deleteAll = async () => {
-  const response = await fetch(`${BASE_URL}/deleteAll`, {
+  const response = await fetch(`${API}/deleteAll`, {
     method: "DELETE",
     credentials: "include",
   });
@@ -52,7 +52,7 @@ export const deleteAll = async () => {
 };
 
 export const updateNote = async (id: string, note: UpdateNote) => {
-  const response = await fetch(`${BASE_URL}/update/${id}`, {
+  const response = await fetch(`${API}/update/${id}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -69,7 +69,7 @@ export const updateNote = async (id: string, note: UpdateNote) => {
 };
 
 export const getNote = async (id: string) => {
-  const response = await fetch(`${BASE_URL}/read/${id}`, {
+  const response = await fetch(`${API}/read/${id}`, {
     credentials: "include",
   });
   if (!response.ok) {
