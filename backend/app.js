@@ -30,18 +30,14 @@ app.use(express.urlencoded({ extended: true }));
 connectDb();
 app.use(cookieParser());
 
-app.get(
-  "/api/health",
-  (req,
-  (res) => {
-    res.status(200).json({
-      status: "ok",
-    });
-  }),
-);
-
 app.use("/", authRouter);
 app.use("/", notesRouter);
 app.use("/", userRouter);
+
+app.get("/api/health", (req, res) => {
+  res.status(200).json({
+    status: "ok",
+  });
+});
 
 export default app;
