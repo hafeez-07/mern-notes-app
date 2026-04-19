@@ -45,11 +45,11 @@ const NoteForm = ({ setNotes }: Props) => {
 
   return (
     <div className="mx-auto max-w-5xl rounded-xl border border-white/20 bg-white/10 shadow-2xl backdrop-blur-2xl">
-      <h2 className="border-b border-zinc-700 px-8 pt-8 pb-4 text-3xl font-semibold">
+      <h2 className="border-b border-zinc-700 px-4 sm:px-8 pt-6 pb-4 text-3xl font-semibold">
         Create a Note
       </h2>
 
-      <form onSubmit={submitHandler} className="flex flex-col gap-2 px-8 pb-8 pt-4">
+      <form onSubmit={submitHandler} className="flex flex-col gap-2 px-4 sm:px-8 pb-8 pt-4">
         <input
           type="text"
           name="title"
